@@ -1,0 +1,18 @@
+@RPSLS_Game_Service_HostAddress = http://localhost:5194
+
+GET {{RPSLS_Game_Service_HostAddress}}/choices
+Accept: application/json
+
+###
+
+POST {{RPSLS_Game_Service_HostAddress}}/play
+Content-Type: application/json
+Accept: application/json
+
+{
+    "player": <choice_id>
+}
+
+GET {{RPSLS_Game_Service_HostAddress}}/choice
+Accept: application/json
+
