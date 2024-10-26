@@ -46,7 +46,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 app.UseCors("AllowAllOrigins");
-app.UseAuthorization(); // Ensure authorization middleware is added if you have it.
+app.UseAuthorization(); 
 
 app.UseEndpoints(endpoints =>
 {
