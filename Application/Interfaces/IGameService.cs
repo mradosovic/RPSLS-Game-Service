@@ -10,7 +10,7 @@ namespace RPSLS_Game.Application.Interfaces
     public interface IGameService
     {
         Task<GameResult> Play(PlayRequest request);
-        Task<ChoiceType> GetRandomChoiceAsync();  
+        Task<Choice> GetRandomChoiceAsync();  
         Task<IEnumerable<Choice>> GetChoicesAsync(); 
     }
 }

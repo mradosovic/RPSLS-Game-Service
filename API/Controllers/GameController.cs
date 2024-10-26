@@ -48,7 +48,7 @@ namespace RPSLS_Game.Presentation.Controllers
             {
                 var randomChoice = await _mediator.Send(new GetRandomChoiceQuery());
 
-                return Ok(new RandomChoiceDto((int)randomChoice, randomChoice.ToString()));
+                return Ok(new RandomChoiceDto(randomChoice.Id, randomChoice.Name));
             }
             catch (Exception ex)
             {

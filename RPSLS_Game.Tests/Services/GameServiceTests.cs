@@ -57,27 +57,20 @@ namespace RPSLS_Game.Tests.Services
         public async Task GetRandomChoiceAsync_ReturnsRandomChoice()
         {
             // Arrange
-            var randomChoiceResponse = new { random_number = 2 }; // two for paper
-            var jsonResponse = JsonConvert.SerializeObject(randomChoiceResponse);
-
-            _httpMessageHandlerMock
-                .Protected()
-                .Setup<Task<HttpResponseMessage>>(
-                    "SendAsync",
-                    ItExpr.IsAny<HttpRequestMessage>(),
-                    ItExpr.IsAny<CancellationToken>())
-                .ReturnsAsync(new HttpResponseMessage
-                {
-                    StatusCode = HttpStatusCode.OK,
-                    Content = new StringContent(jsonResponse, Encoding.UTF8, "application/json")
-                });
+            var expectedChoice = new Choice(2, "Paper"); // Choice ID 2 corresponds to "Paper"
+            _choiceRepositoryMock
+                .Setup(repo => repo.GetRandomChoiceAsync())
+                .ReturnsAsync(expectedChoice);
 
             // Act
             var result = await _gameService.GetRandomChoiceAsync();
 
             // Assert
-            Assert.Equal(ChoiceType.Paper, result); 
+            Assert.Equal(expectedChoice, result);
+            Assert.Equal(expectedChoice.Id, result.Id);
+            Assert.Equal(expectedChoice.Name, result.Name);
         }
+
 
         [Fact]
         public async Task Play_ReturnsGameResult_WhenValidRequest()

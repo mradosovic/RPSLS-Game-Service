@@ -6,6 +6,7 @@ using Domain;
 using RPSLS_Game.Presentation.DTOs;
 using RPSLS_Game.Application.Models;
 using Infrastructure.DTOs;
+using RPSLS_Game.Domain.Models;
 
 namespace RPSLS_Game.Api.Tests
 {
@@ -54,7 +55,7 @@ namespace RPSLS_Game.Api.Tests
         public async Task GetRandomChoice_ReturnsOkWithRandomChoiceDto()
         {
             // Arrange
-            var randomChoice = ChoiceType.Rock;
+            var randomChoice = new Choice(1, "Rock");
             _mediatorMock
                 .Setup(m => m.Send(It.IsAny<GetRandomChoiceQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(randomChoice);
@@ -65,8 +66,8 @@ namespace RPSLS_Game.Api.Tests
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
             var dto = Assert.IsType<RandomChoiceDto>(okResult.Value);
-            Assert.Equal((int)randomChoice, dto.Id);
-            Assert.Equal(randomChoice.ToString(), dto.Name);
+            Assert.Equal(randomChoice.Id, dto.Id);
+            Assert.Equal(randomChoice.Name, dto.Name);
         }
 
         [Fact]

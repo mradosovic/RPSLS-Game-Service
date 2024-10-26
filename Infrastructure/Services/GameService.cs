@@ -34,37 +34,13 @@ namespace RPSLS_Game.Application.Services
             return await _choiceRepository.GetChoicesAsync();
         }
 
-        public async Task<ChoiceType> GetRandomChoiceAsync()
+        public async Task<Choice> GetRandomChoiceAsync()
         {
-            ChoiceType randomChoiceId;
+            Choice randomChoice;
 
             try
             {
-                var response = await _httpClient.GetStringAsync(_apiSettings.RandomChoiceApiUrl);
-                var jsonResponse = JsonConvert.DeserializeObject<Dictionary<string, int>>(response);
-
-                var randomNumber = jsonResponse["random_number"];
-                randomChoiceId = (ChoiceType)randomNumber;
-            }
-            catch (InvalidOperationException ex)
-            {
-                _logger.LogError(ex, "An error occurred in {MethodName} while calling the API", nameof(GetRandomChoiceAsync));
-                throw new Exception("Unable to get a random choice due to an API error.");
-            }
-            catch (HttpRequestException ex)
-            {
-                _logger.LogError(ex, "An error occurred in {MethodName} while calling the API", nameof(GetRandomChoiceAsync));
-                throw new Exception("Unable to get a random choice due to an API error.");
-            }
-            catch (TaskCanceledException ex)
-            {
-                _logger.LogError(ex, "An error occurred in {MethodName} while calling the API", nameof(GetRandomChoiceAsync));
-                throw new Exception("Unable to get a random choice due to an API error.");
-            }
-            catch (UriFormatException ex)
-            {
-                _logger.LogError(ex, "An error occurred in {MethodName} while parsing the API response", nameof(GetRandomChoiceAsync));
-                throw new Exception("Unable to parse the random choice from the API response.");
+                randomChoice = await _choiceRepository.GetRandomChoiceAsync();
             }
             catch (Exception ex)
             {
@@ -72,7 +48,7 @@ namespace RPSLS_Game.Application.Services
                 throw new Exception("An unexpected error occurred.");
             }
 
-            return randomChoiceId;
+            return randomChoice;
         }
 
         public async Task<GameResult> Play(PlayRequest request)
