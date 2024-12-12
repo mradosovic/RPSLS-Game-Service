@@ -1,6 +1,6 @@
-﻿using RPSLS_Game.Domain.Models;
+﻿using Domain.Entities;
 
-namespace RPSLS_Game.Application.Interfaces
+namespace Domain.Repositories
 {
     /// <summary>
     /// Choice repository interface.

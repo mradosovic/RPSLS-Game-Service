@@ -1,9 +1,5 @@
-﻿
-namespace Infrastructure.DTOs
+﻿namespace Infrastructure.DTOs
 {
-    /// <summary>
-    /// Random choice DTO.
-    /// </summary>
     public class RandomChoiceDto
     {
         public int Id { get; set; }

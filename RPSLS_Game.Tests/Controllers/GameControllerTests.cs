@@ -86,11 +86,11 @@ namespace RPSLS_Game.Api.Tests
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
-            var playResultDto = Assert.IsType<PlayResultDto>(okResult.Value);
+            var playResultDto = Assert.IsType<GameResultDto>(okResult.Value);
 
             Assert.Equal(expectedPlayResultDto.Results, playResultDto.Results);
-            Assert.Equal(expectedPlayResultDto.PlayerChoiceId, playResultDto.PlayerChoiceId);
-            Assert.Equal(expectedPlayResultDto.ComputerChoiceId, playResultDto.ComputerChoiceId);
+            Assert.Equal(expectedPlayResultDto.PlayerChoiceId, playResultDto.Player);
+            Assert.Equal(expectedPlayResultDto.ComputerChoiceId, playResultDto.Computer);
         }
 
 

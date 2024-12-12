@@ -1,13 +1,14 @@
-using RPSLS_Game.Application.Interfaces;
-using RPSLS_Game.Application.Services;
 using Microsoft.OpenApi.Models;
 using FluentValidation.AspNetCore;
+using Infrastructure.Settings;
+using Infrastructure.Validators;
+using Application.Handlers.CommandHandlers;
+using Domain.Repositories;
 using Infrastructure.Repositories;
-using RPSLS_Game.Application.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//Add services to the container.
 builder.Services.AddControllers()
         .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<PlayRequestDTOValidator>());
 
@@ -22,7 +23,6 @@ builder.Services.AddCors(options =>
 
 // Register services
 builder.Services.AddSingleton<IChoiceRepository, ChoiceRepository>();
-builder.Services.AddTransient<IGameService, GameService>();
 builder.Services.AddHttpClient();
 builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection("ApiSettings"));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<PlayHandler>());

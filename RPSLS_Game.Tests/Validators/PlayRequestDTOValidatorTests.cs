@@ -1,5 +1,6 @@
 ﻿using FluentValidation.TestHelper;
-using RPSLS_Game.Presentation.DTOs;
+using Infrastructure.DTOs;
+using Infrastructure.Validators;
 
 namespace RPSLS_Game.Tests.Validators
 {

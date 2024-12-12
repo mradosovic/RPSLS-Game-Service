@@ -1,27 +1,22 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using RPSLS_Game.Application.Interfaces;
-using RPSLS_Game.Application.Services;
-using RPSLS_Game.Application.Settings;
-using RPSLS_Game.Domain.Models;
 using System.Net.Http.Json;
+using Domain.Repositories;
+using Domain.Entities;
+using Infrastructure.Settings;
 
 namespace Infrastructure.Repositories
 {
-    /// <summary>
-    /// Choice repository.
-    /// </summary>
     public class ChoiceRepository : IChoiceRepository
     {
         private readonly ApiSettings _apiSettings;
-        private readonly ILogger<GameService> _logger;
+        private readonly ILogger _logger;
 
-        public ChoiceRepository(IOptions<ApiSettings> apiSettings, ILogger<GameService> logger)
+        public ChoiceRepository(IOptions<ApiSettings> apiSettings, ILogger<ChoiceRepository> logger)
         {
             _apiSettings = apiSettings.Value;
             _logger = logger;
         }
-
         private static readonly List<Choice> Choices = new()
         {
             new Choice(1, "Rock"),
@@ -51,7 +46,7 @@ namespace Infrastructure.Repositories
                     throw new Exception("Failed to retrieve random number.");
                 }
 
-                var randomNumber = response.random_number; 
+                var randomNumber = response.random_number;
                 index = randomNumber % Choices.Count; //This effectively "wraps" the random number to ensure it stays within the bounds of the list.
                                                       //For example, if randomNumber is 7 and there are 5 choices, 7 % 5 would yield 2, allowing access to the third choice in the list.
             }
@@ -65,7 +60,7 @@ namespace Infrastructure.Repositories
         }
     }
 
-    public class RandomNumberResponse
+    internal class RandomNumberResponse
     {
         public int random_number { get; set; }
     }

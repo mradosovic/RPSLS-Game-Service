@@ -1,15 +1,11 @@
-﻿using Domain;
+﻿
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
-using Moq.Protected;
-using Newtonsoft.Json;
 using RPSLS_Game.Application.Interfaces;
 using RPSLS_Game.Application.Services;
 using RPSLS_Game.Application.Settings;
 using RPSLS_Game.Domain.Models;
-using System.Net;
-using System.Text;
 
 namespace RPSLS_Game.Tests.Services
 {

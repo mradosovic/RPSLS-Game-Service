@@ -1,8 +1,5 @@
-﻿namespace Domain
+﻿namespace Domain.Entities
 {
-    /// <summary>
-    /// Represents a choice type.
-    /// </summary>
     public enum ChoiceType
     {
         Rock = 1,

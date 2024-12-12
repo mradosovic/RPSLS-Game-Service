@@ -1,9 +1,12 @@
 using Infrastructure.DTOs;
+using Application.Handlers.CommandHandlers;
+using Application.Handlers.QueryHandlers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using RPSLS_Game.Presentation.DTOs;
+using Application.Queries;
+using Application.Commands;
 
-namespace RPSLS_Game.Presentation.Controllers
+namespace API.Controllers
 {
     [ApiController]
     [Route("")]
@@ -69,7 +72,7 @@ namespace RPSLS_Game.Presentation.Controllers
                     return NotFound("Unable to complete the game with the provided data.");
                 }
 
-                return Ok(new PlayResultDto(result.Results, result.Player, result.Computer));
+                return Ok(new GameResultDto(result.Result.ToString(), result.PlayersChoice, result.ComputersChoice));
             }
             catch (Exception ex)
             {

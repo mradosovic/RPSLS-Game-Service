@@ -1,8 +1,5 @@
-﻿namespace RPSLS_Game.Domain.Models
+﻿namespace Domain.Entities
 {
-    /// <summary>
-    /// Represents a choice.
-    /// </summary>
     public class Choice
     {
         public int Id { get; set; }

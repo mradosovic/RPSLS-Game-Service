@@ -1,4 +1,4 @@
-﻿namespace RPSLS_Game.Application.Settings
+﻿namespace Infrastructure.Settings
 {
     public class ApiSettings
     {
