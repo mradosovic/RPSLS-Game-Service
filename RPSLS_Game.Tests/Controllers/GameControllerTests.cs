@@ -7,7 +7,7 @@ using Domain.Entities;
 using Application.Queries;
 using Application.Commands;
 
-namespace RPSLS_Game.Api.Tests
+namespace Api.Tests
 {
     public class GameControllerTests
     {
