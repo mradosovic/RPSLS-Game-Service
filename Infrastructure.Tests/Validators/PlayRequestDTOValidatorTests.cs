@@ -2,7 +2,7 @@
 using Infrastructure.DTOs;
 using Infrastructure.Validators;
 
-namespace RPSLS_Game.Tests.Validators
+namespace Infrastructure.Tests.Validators
 {
     public class PlayRequestDTOValidatorTests
     {

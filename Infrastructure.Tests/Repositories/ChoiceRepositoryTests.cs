@@ -9,7 +9,7 @@ using System.Net;
 using System.Text;
 using Domain.Entities;
 
-namespace RPSLS_Game.Tests.Repositories
+namespace Infrastructure.Tests.Repositories
 {
     public class ChoiceRepositoryTests
     {
