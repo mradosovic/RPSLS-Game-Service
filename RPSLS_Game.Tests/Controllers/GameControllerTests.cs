@@ -1,12 +1,11 @@
 ﻿using Moq;
 using Microsoft.AspNetCore.Mvc;
-using RPSLS_Game.Presentation.Controllers;
 using MediatR;
-using Domain;
-using RPSLS_Game.Presentation.DTOs;
-using RPSLS_Game.Application.Models;
 using Infrastructure.DTOs;
-using RPSLS_Game.Domain.Models;
+using API.Controllers;
+using Domain.Entities;
+using Application.Queries;
+using Application.Commands;
 
 namespace RPSLS_Game.Api.Tests
 {
@@ -36,7 +35,6 @@ namespace RPSLS_Game.Api.Tests
             var okResult = Assert.IsType<OkObjectResult>(result);
             var actualChoiceDtos = Assert.IsAssignableFrom<IEnumerable<ChoiceDto>>(okResult.Value);
 
-            // Create expected choice DTOs
             var expectedChoiceDtos = expectedChoices.Select(c => new ChoiceDto
             {
                 Id = (int)c,
@@ -75,8 +73,8 @@ namespace RPSLS_Game.Api.Tests
         {
             // Arrange
             var playRequest = new PlayRequestDTO { Player = (int)ChoiceType.Rock };
-            var expectedResult = new GameResult("Player wins", (int)ChoiceType.Rock, (int)ChoiceType.Scissors);
-            var expectedPlayResultDto = new PlayResultDto(expectedResult.Results, expectedResult.Player, expectedResult.Computer);
+            var expectedResult = new GameResult(GameResultType.Win, (int)ChoiceType.Rock, (int)ChoiceType.Scissors);
+            var expectedPlayResultDto = new GameResultDto(expectedResult.Result.ToString(), expectedResult.PlayersChoice, expectedResult.ComputersChoice);
 
             _mediatorMock.Setup(m => m.Send(It.IsAny<PlayCommand>(), default))
                 .ReturnsAsync(expectedResult);
@@ -89,8 +87,8 @@ namespace RPSLS_Game.Api.Tests
             var playResultDto = Assert.IsType<GameResultDto>(okResult.Value);
 
             Assert.Equal(expectedPlayResultDto.Results, playResultDto.Results);
-            Assert.Equal(expectedPlayResultDto.PlayerChoiceId, playResultDto.Player);
-            Assert.Equal(expectedPlayResultDto.ComputerChoiceId, playResultDto.Computer);
+            Assert.Equal(expectedPlayResultDto.Player, playResultDto.Player);
+            Assert.Equal(expectedPlayResultDto.Computer, playResultDto.Computer);
         }
 
 

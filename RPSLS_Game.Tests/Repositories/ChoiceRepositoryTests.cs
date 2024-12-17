@@ -4,25 +4,24 @@ using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Protected;
 using Newtonsoft.Json;
-using RPSLS_Game.Application.Services;
 using Infrastructure.Settings;
-using Domain.Models;
 using System.Net;
 using System.Text;
+using Domain.Entities;
 
 namespace RPSLS_Game.Tests.Repositories
 {
     public class ChoiceRepositoryTests
     {
-        private readonly Mock<ILogger<GameService>> _loggerMock;
         private readonly Mock<IOptions<ApiSettings>> _apiSettingsMock;
+        private readonly Mock<ILogger<ChoiceRepository>> _loggerMock;
         private readonly ChoiceRepository _repository;
 
         public ChoiceRepositoryTests()
         {
-            _loggerMock = new Mock<ILogger<GameService>>();
             _apiSettingsMock = new Mock<IOptions<ApiSettings>>();
             _apiSettingsMock.Setup(x => x.Value).Returns(new ApiSettings { RandomChoiceApiUrl = "https://codechallenge.boohma.com/random" });
+            _loggerMock = new Mock<ILogger<ChoiceRepository>>();
             _repository = new ChoiceRepository(_apiSettingsMock.Object, _loggerMock.Object);
         }
 
@@ -66,6 +65,11 @@ namespace RPSLS_Game.Tests.Repositories
 
             // Assert
             Assert.NotNull(result);
+        }
+
+        internal class RandomNumberResponse
+        {
+            public int random_number { get; set; }
         }
 
     }
