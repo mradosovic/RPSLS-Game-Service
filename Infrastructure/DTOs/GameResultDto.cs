@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.DTOs
 {
-    public class GameResultDto
+    public record GameResultDto
     {
         public string Results { get; set; }
         public int Player { get; set; }

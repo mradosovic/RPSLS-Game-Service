@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.DTOs
 {
-    public class PlayRequestDTO
+    public record PlayRequestDTO
     {
         public int Player { get; set; }
     }
