@@ -21,6 +21,7 @@ The RPSLS Game Service is a web API built using ASP.NET Core that enables users 
 ## Getting Started
 
 To run the project locally, clone and run in IIS expres.
+Front end for testing: https://codechallenge.boohma.com/
 
 ## License
 
